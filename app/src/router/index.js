@@ -20,6 +20,17 @@ const routes = [
   },
 ];
 
+// potential solution for rerouting when not logged in
+// router.beforeEach((to, from, next) => {
+//   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+//   const currentUser = fb.auth.currentUser
+
+//   if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } })
+//   else if (!requiresAuth && currentUser) next('/')
+//   else if (!requiresAuth && !currentUser) next()
+//   else next()
+// })
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
