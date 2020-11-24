@@ -62,14 +62,14 @@
           ></b-form-select>
       </b-form-group>
       <b-form-group id="input-group-5">
-        <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-          <b-form-checkbox required value="can work" unchecked-value="rejected">
-            I can legally work in the United States.
-          </b-form-checkbox>
-          <b-form-checkbox required value="accepted terms" unchecked-value="rejected">
-            I accept the terms outlined above.
-          </b-form-checkbox>
-        </b-form-checkbox-group>
+        <b-form-checkbox required name="input-5">
+          I can legally work in the United States.
+        </b-form-checkbox>
+      </b-form-group>
+      <b-form-group id="group-7">
+        <b-form-checkbox required name="input-7">
+          I accept the terms and conditions above.
+        </b-form-checkbox>
       </b-form-group>
       <b-button class="submit-btn" type="submit" variant="primary">Submit</b-button>
       <b-button class="reset-btn" type="reset" variant="danger">Reset</b-button>
@@ -98,7 +98,6 @@ export default {
         name: '',
         password: '',
         birthday: '',
-        checked: [],
       },
       classification: [
         { text: 'Select One', value: null, disabled: true },
@@ -119,7 +118,6 @@ export default {
       this.form.name = '';
       this.form.password = '';
       this.form.birthday = '';
-      this.form.checked = [];
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
