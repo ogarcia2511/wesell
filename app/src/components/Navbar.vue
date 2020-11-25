@@ -14,6 +14,9 @@
         <li class="nav-item">
           <router-link class="nav-link" active-class="active" to="/login">Login</router-link>
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link" active-class="active" to="/create">Create</router-link>
+        </li>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">

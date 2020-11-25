@@ -64,4 +64,11 @@ WeSellAPI.install = function (Vue, options) {
   Vue.getListingsByOwner = function () {
 
   };
+
+  // createNewListing(): creates a new listing
+  // params: listing
+  // returns isSuccessful (boolean)
+  Vue.createNewListing = function () {
+
+  };
 };

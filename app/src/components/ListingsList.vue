@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-10" role="tablist">
-    <Listing
+    <ViewListing
       productName="Product Name"
       companyName="Test Co."
       blurb="A short paragraph describing
@@ -9,7 +9,7 @@
       :description="text"
       id="accordion-1" />
 
-    <Listing
+    <ViewListing
       productName="Product Name"
       companyName="Test Co."
       blurb="A short paragraph describing
@@ -18,7 +18,7 @@
       :description="text"
       id="accordion-2" />
 
-    <Listing
+    <ViewListing
       productName="Product Name"
       companyName="Test Co."
       blurb="A short paragraph describing
@@ -31,10 +31,10 @@
 </template>
 
 <script>
-import Listing from '@/components/Listing.vue';
+import ViewListing from '@/components/ViewListing.vue';
 
 export default {
-  components: { Listing },
+  components: { ViewListing },
   props: ['search'],
   data() {
     return {

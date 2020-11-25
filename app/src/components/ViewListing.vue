@@ -1,12 +1,19 @@
 <template>
   <div>
     <b-card no-body class="mb-1 dark">
-      <b-card-header v-b-toggle:[id] header-tag="header" class="p-1" role="tab">
+      <b-card-header v-b-toggle:[id] header-tag="header" role="tab">
         <!-- <b-button block v-b-toggle.accordion-1
         class="mr-auto" variant="dark">Accordion 1</b-button> -->
-        <h3>{{ productName }}</h3>
-        <h5>{{ companyName }}</h5>
-        <p>{{ blurb }}</p>
+        <b-row>
+          <b-col cols="8">
+            <h3>{{ productName }}</h3>
+            <h5>{{ companyName }}</h5>
+            <p>{{ blurb }}</p>
+          </b-col>
+          <b-col cols="4" class="text-right">
+            <button disabled class="price-box border border-success rounded">$100.00/sale</button>
+          </b-col>
+        </b-row>
       </b-card-header>
       <b-collapse :id="id" visible accordion="my-accordion" role="tabpanel">
         <b-card-body>
@@ -41,5 +48,10 @@ p {
 b-card-img {
   width: 50;
   height: 50;
+}
+.price-box {
+  font-family: monospace;
+  color: green;
+  padding: 2px;
 }
 </style>
