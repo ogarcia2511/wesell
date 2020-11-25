@@ -1,51 +1,40 @@
 <template>
   <div class="col-md-10" role="tablist">
-    <b-card no-body class="mb-1">
-      <b-card-header v-b-toggle.accordion-1 header-tag="header" class="p-1" role="tab">
-        <!-- <b-button block v-b-toggle.accordion-1
-        class="mr-auto" variant="dark">Accordion 1</b-button> -->
-        <h3>Product Name</h3>
-        <p>
-          A short paragraph describing the product itself. Maybe add a company
-          name here?
-        </p>
-      </b-card-header>
-      <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
-        <b-card-body>
-          <b-card-text>
-            I start opened because <code>visible</code> is <code>true</code>
-          </b-card-text>
-          <b-card-text>{{ text }}</b-card-text>
-        </b-card-body>
-      </b-collapse>
-    </b-card>
+    <Listing
+      productName="Product Name"
+      companyName="Test Co."
+      blurb="A short paragraph describing
+      the product itself. Maybe add a company
+      name here?"
+      :description="text"
+      id="accordion-1" />
 
-    <b-card no-body class="mb-1">
-      <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-button block v-b-toggle.accordion-2 variant="dark">Accordion 2</b-button>
-      </b-card-header>
-      <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
-        <b-card-body>
-          <b-card-text>{{ text }}</b-card-text>
-        </b-card-body>
-      </b-collapse>
-    </b-card>
+    <Listing
+      productName="Product Name"
+      companyName="Test Co."
+      blurb="A short paragraph describing
+      the product itself. Maybe add a company
+      name here?"
+      :description="text"
+      id="accordion-2" />
 
-    <b-card no-body class="mb-1">
-      <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-button block v-b-toggle.accordion-3 variant="dark">Accordion 3</b-button>
-      </b-card-header>
-      <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-        <b-card-body>
-          <b-card-text>{{ text }}</b-card-text>
-        </b-card-body>
-      </b-collapse>
-    </b-card>
+    <Listing
+      productName="Product Name"
+      companyName="Test Co."
+      blurb="A short paragraph describing
+      the product itself. Maybe add a company
+      name here?"
+      :description="text"
+      id="accordion-3" />
+
   </div>
 </template>
 
 <script>
+import Listing from '@/components/Listing.vue';
+
 export default {
+  components: { Listing },
   props: ['search'],
   data() {
     return {
@@ -67,9 +56,5 @@ export default {
 <style scoped>
 .col-md-10 {
   margin: auto;
-}
-p {
-  margin-top: 0;
-  margin-bottom: 0;
 }
 </style>
