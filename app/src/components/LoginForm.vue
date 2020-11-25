@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="container">
     <h1>Hello, welcome back to WeSell!</h1>
     <br>
     <form action="TODO: SEND DATA TO WEBPAGE TO BE PASSED ON TO FIREBASE" method="TBD">
@@ -17,7 +17,11 @@
             </li>
             <br><br>
             <!-- TODO: Implement link to register page -->
-            <p>New User? Register here!</p>
+            <li class="nav-item">
+                <router-link class="nav-link" active-class="active" to="/register">
+                   New User? Register here!
+                </router-link>
+            </li>
             <!--TODO: Implement forgot password functionality -->
             <p>Forgot password?</p>
         </ul>
