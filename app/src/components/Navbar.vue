@@ -11,11 +11,15 @@
         <li class="nav-item">
           <router-link class="nav-link" active-class="active" to="/register">Register</router-link>
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link" active-class="active" to="/login">Login</router-link>
+        </li>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown right>
           <template #button-content>User</template>
+          <!-- TODO: Link to completed profile page -->
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item href="#">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
