@@ -22,6 +22,7 @@
             <b-card-img thumbnail fluid src="https://pbs.twimg.com/profile_images/1285655593592791040/HtwPZgej.jpg"/>
           </b-col>
           <b-col cols="8">
+            <ListingApply :modalId="modalId" />
             <b-card-text>
               I start opened because <code>visible</code> is <code>true</code>
             </b-card-text>
@@ -35,8 +36,16 @@
 </template>
 
 <script>
+import ListingApply from '@/components/ListingApply.vue';
+
 export default {
+  components: { ListingApply },
   props: ['id', 'productName', 'companyName', 'blurb', 'description', 'photoLink'],
+  data() {
+    return {
+      modalId: `m${this.id}`,
+    };
+  },
 };
 </script>
 
