@@ -18,9 +18,9 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>John Doe</h4>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                      <h4>Franky Fast-Hands</h4>
+                      <p class="text-secondary mb-1">Black Market Kitten Dealership</p>
+                      <p class="text-muted font-size-sm">Back Alley, NY</p>
                     </div>
                   </div>
                 </div>
@@ -58,7 +58,7 @@
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Kenneth Valdez
+                      Franklin Roosevelt of the Quick Wit
                     </div>
                   </div>
                   <hr>
@@ -94,7 +94,7 @@
                       <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Bay Area, San Francisco, CA
+                      Back Alley, NY
                     </div>
                   </div>
                 </div>
@@ -103,24 +103,24 @@
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">Specializations</h6>
-                      <small>Cat Litter</small>
+                      <h6 class="d-flex align-items-center mb-3">Items to Sell</h6>
+                      <small>Calico</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Portable Jiggolos</small>
+                      <small>Tabby</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Expert Gamer Grub</small>
+                      <small>Egyptian</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Speakers</small>
+                      <small>Norse</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Petty Theft</small>
+                      <small>Small</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
@@ -130,24 +130,24 @@
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">Sales Highlights</h6>
-                      <small>Mark's Whores n Mores</small>
+                      <h6 class="d-flex align-items-center mb-3">WeSeller Ratings</h6>
+                      <small>Quality</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Frank's Franks</small>
+                      <small>Responsiveness</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Nigel's Cudgels</small>
+                      <small>Reliability</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Lenny's Letters</small>
+                      <small>Friendliness</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Barry's Backend API</small>
+                      <small>Sales Connections</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>

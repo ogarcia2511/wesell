@@ -1,29 +1,36 @@
 <template>
   <div class="container">
-    <h1>Hello, welcome back to WeSell!</h1>
+    <h1 class="d-flex justify-content-center">Hello, welcome back to WeSell!</h1>
     <br>
-    <form action="TODO: SEND DATA TO WEBPAGE TO BE PASSED ON TO FIREBASE" method="TBD">
+    <form action="javascript:firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((user) => {
+        // Signed in
+        // ...
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+        });">
         <ul>
-            <li>
-                <label for="email">Email:</label>
+            <li class="d-flex justify-content-center">
+                <label for="email">Email: </label>
                 <input type="email" id="email" name="email" required><br>
             </li><br>
-            <li>
+            <li class="d-flex justify-content-center">
                 <label for="Password">Password:</label>
                 <input type="password" id="pass" name="password" required><br>
             </li><br>
-            <li class="button">
+            <li class="d-flex justify-content-center button">
                 <button type="submit">Login</button>
             </li>
             <br><br>
-            <!-- TODO: Implement link to register page -->
-            <li class="nav-item">
+            <li class="nav-item d-flex justify-content-center">
                 <router-link class="nav-link" active-class="active" to="/register">
                    New User? Register here!
                 </router-link>
             </li>
             <!--TODO: Implement forgot password functionality -->
-            <p>Forgot password?</p>
+            <p class="d-flex justify-content-center">Forgot password?</p>
         </ul>
     </form>
   </div>

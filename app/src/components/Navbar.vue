@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable max-len -->
   <div>
   <b-navbar toggleable="md" type="dark" variant="dark">
     <b-navbar-brand to="/">WeSell</b-navbar-brand>
@@ -22,8 +23,7 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown right>
           <template #button-content>User</template>
-          <!-- TODO: Link to completed profile page -->
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item><router-link style="color:black" to="/profile">My Profile</router-link></b-dropdown-item>
           <b-dropdown-item href="#">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
