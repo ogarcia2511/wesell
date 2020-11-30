@@ -115,7 +115,14 @@ export default {
       const email = this.form.email;
       // eslint-disable-next-line prefer-destructuring
       const password = this.form.password;
-      this.registerContractor(email, password);
+      // eslint-disable-next-line prefer-destructuring
+      const name = this.form.name;
+      // eslint-disable-next-line prefer-destructuring
+      const birthday = this.form.birthday;
+      // eslint-disable-next-line prefer-destructuring
+      const classification = this.form.classification;
+
+      this.registerContractor(email, password, name, birthday, classification);
     },
     onReset(evt) {
       evt.preventDefault();

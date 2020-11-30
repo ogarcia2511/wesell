@@ -25,33 +25,54 @@ export default {
   install(Vue, options) {
 
     // registerVendor(): registers a vendor account
-    // params: email (String), name (String), password (String), classification (number)
+    // params: email (String), name (String), password (String), classification (number), type (boolean)
     // returns isSuccessful (boolean)
-    Vue.prototype.registerVendor = function (email, password) {
-      //create the user with the email and password
-      firebase.auth().createUserWithEmailAndPassword(email,password).then(cred =>{
-        console.log(`User has uid ${cred.user.uid}`);
-        return database.collection('users').doc(cred.user.uid).set({
-          email:email
-        }).then(()=>{
-          console.log('User created in database');
-        })
+    Vue.prototype.registerVendor = function (email, password, name, classification) {
+      const type = 0;
+
+      firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((cred) => {
+        const { user } = cred;
+
+        if (user) {
+          user.updateProfile({
+            name,
+            classification,
+            type
+          });
+        }
       })
+      .catch((err) => {
+        console.log(err.message);
+      });
     };
 
     // registerContractor(): registers a contractor account
-    // params: email (String), name (String), password (String), birthday (Unix timestamp), classification (number)
+    // params: email (String), name (String), password (String), birthday (Unix timestamp), classification (number), type (boolean)
     // returns isSuccessful (boolean)
-    Vue.prototype.registerContractor = function (email, password) {
-      //create the user with the email and password
-      firebase.auth().createUserWithEmailAndPassword(email,password).then(cred =>{
-        console.log(`User has uid ${cred.user.uid}`);
-        return database.collection('users').doc(cred.user.uid).set({
-          email:email
-        }).then(()=>{
-          console.log('User created in database');
-        })
+    Vue.prototype.registerContractor = function (email, password, name, birthday, classification) {
+      const type = 1;
+
+      firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((cred) => {
+        const { user } = cred;
+
+        if (user) {
+          user.updateProfile({
+            name,
+            birthday,
+            classification,
+            type
+          });
+        }
       })
+      .catch((err) => {
+        console.log(err.message);
+      });
     };
 
     // loginUser(): logs in a user
