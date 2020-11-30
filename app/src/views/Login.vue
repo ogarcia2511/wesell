@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <LoginForm/>
+    <LoginForm />
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import LoginForm from '@/components/LoginForm.vue';
 
 export default {
-  name: '/Login',
+  name: 'Login',
   components: {
     LoginForm,
   },

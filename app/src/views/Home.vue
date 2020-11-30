@@ -2,7 +2,9 @@
   <div class="home">
     <img id="logo" alt="Vue logo" src="../assets/logo.png">
     <h1 class="d-flex justify-content-center">Welcome to WeSell! Where dreams come true</h1>
-    <h4 class="d-flex justify-content-center" style="color:red">Come check out the hottest things selling right now!</h4>
+    <h4 class="d-flex justify-content-center" style="color:red">
+      Come check out the hottest things selling right now!
+    </h4>
     <br><br>
     <ListingsList search=""/>
   </div>

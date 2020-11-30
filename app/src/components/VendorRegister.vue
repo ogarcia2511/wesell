@@ -90,6 +90,9 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
+      this.registerVendor(email, password);
     },
     onReset(evt) {
       evt.preventDefault();
