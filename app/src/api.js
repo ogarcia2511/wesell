@@ -1,6 +1,13 @@
 /* External API for interfacing with backend.
   ESLint turned off for usability purposes. */
 
+//import firebase so it can be used here
+import firebase from 'firebase';
+
+//file global constant used to interact with the databases
+const database = firebase.firestore();
+
+
 WeSellAPI.install = function (Vue, options) {
 
   // registerVendor(): registers a vendor account
@@ -19,6 +26,15 @@ WeSellAPI.install = function (Vue, options) {
   // params: email (String), password (String)
   // returns user id (number), token (String)
   Vue.loginUser = function () {
+    //create the user with the email and password
+      firebase.auth().createUserWithEmailAndPassword(email,password).then(cred =>{
+        console.log(`User has uid ${cred.user.uid}`);
+        return database.collection('users').doc(cred.user.uid).set({
+          email:email
+        }).then(()=>{
+          console.log('User created in database');
+        })
+      })
   };
 
   /* object definition: listing (what users see at a glance)
