@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
 <template>
+  <!-- eslint-disable max-len -->
   <div class="about">
     <h1 class="d-flex justify-content-center">Welcome to WeSell! A community for doers and sellers!</h1><br>
     <h3 class="d-flex justify-content-center">WeSell is a place where you can find your calling! We are connecting great people with great
