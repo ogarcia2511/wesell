@@ -24,6 +24,7 @@
         <b-nav-item-dropdown right>
           <template #button-content>User</template>
           <b-dropdown-item><router-link style="color:black" to="/profile">My Profile</router-link></b-dropdown-item>
+          <b-dropdown-item><router-link style="color:black" to="/mylistings">My Listings</router-link></b-dropdown-item>
           <b-dropdown-item href="#">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>

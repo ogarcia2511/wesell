@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Register from '../views/Register.vue';
 import Profile from '../views/Profile.vue';
 import CreateListing from '../views/CreateListing.vue';
+import MyListings from '../views/MyListings.vue';
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
     path: '/create',
     name: 'Create',
     component: CreateListing,
+  },
+  {
+    path: '/mylistings',
+    name: 'MyListings',
+    component: MyListings,
   },
 ];
 

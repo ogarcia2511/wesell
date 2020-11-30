@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
     <h1>WeSeller Profile Template</h1>
     <ProfileTemplate/>
     <h1>Vendor Profile Template</h1>
