@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 <template>
   <div class="root col-sm-6">
     <h3>WeSeller Registration</h3>
@@ -110,6 +111,18 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
+      // eslint-disable-next-line prefer-destructuring
+      const email = this.form.email;
+      // eslint-disable-next-line prefer-destructuring
+      const password = this.form.password;
+      // eslint-disable-next-line prefer-destructuring
+      const name = this.form.name;
+      // eslint-disable-next-line prefer-destructuring
+      const birthday = this.form.birthday;
+      // eslint-disable-next-line prefer-destructuring
+      const classification = this.form.classification;
+
+      this.registerContractor(email, password, name, birthday, classification);
     },
     onReset(evt) {
       evt.preventDefault();

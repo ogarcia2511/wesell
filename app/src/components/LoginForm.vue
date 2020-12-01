@@ -2,15 +2,8 @@
   <div class="container">
     <h1 class="d-flex justify-content-center">Hello, welcome back to WeSell!</h1>
     <br>
-    <form action="javascript:firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((user) => {
-        // Signed in
-        // ...
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-        });">
+    <div v-if="error" class="alert alert-danger">{{ error }}</div>
+    <form @submit="onSubmit">
         <ul>
             <li class="d-flex justify-content-center">
                 <label for="email">Email: </label>
@@ -39,7 +32,20 @@
 <script>
 export default {
   name: 'LoginForm',
+  data() {
+    return {
+      error: null,
+    };
+  },
   props: {},
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault();
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
+      this.loginUser(email, password);
+    },
+  },
 };
 </script>
 
