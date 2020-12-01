@@ -18,12 +18,24 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-firebase.auth().onAuthStateChanged(user => {
+//file global constant used to interact with the databases
+const db = firebase.firestore();
+
+firebase.auth().onAuthStateChanged((user) => {
+  let data = null;
+
+  if (user) {
+    db.doc(`users/${user.uid}`)
+      .get()
+      .then((res) => { store.dispatch("setData", res.data()); });
+  } else {
+    data = null;
+    store.dispatch("setData", data);
+  }
+
   store.dispatch("setUser", user);
 });
 
-//file global constant used to interact with the databases
-const db = firebase.firestore();
 
 export default {
   install(Vue, options) {
@@ -52,8 +64,8 @@ export default {
         const { user } = cred;
 
         db.collection("users")
-        .add({
-          uid: user.uid,
+        .doc(user.uid)
+        .set({
           name,
           classification,
           type,
@@ -77,8 +89,8 @@ export default {
         const { user } = cred;
 
         db.collection("users")
-        .add({
-          uid: user.uid,
+        .doc(user.uid)
+        .set({
           name,
           birthday,
           classification,
@@ -106,16 +118,15 @@ export default {
     };
 
     /* object definition: listing (what users see at a glance)
-      - id (number) <-- primary key from db
+      - listing id (number) <-- primary key from db
       - product name (String)
       - company name (String)
       - blurb (String)
       - description (String)
       - vendor id (number)
-      - vendor name (String)
       - main image (String -- link to image)
       - expected price per sale (number)
-      -
+      - users: Array of [ WeSellers id ]
     */
 
     // individual product pages are low priority and prob out of scope but
@@ -193,3 +204,4 @@ export default {
     };
   },
 }
+
