@@ -14,6 +14,9 @@
                       <h4>Kitton Mittons</h4>
                       <p class="text-secondary mb-1">Black Market Kitten Dealership</p>
                       <p class="text-muted font-size-sm">Back Alley, NY</p>
+                      <!-- TODO: Only show these if owner of profile -->
+                      <button action="TODO: Open new listing page">Create New Listing</button><br><br>
+                      <button action="TODO: Open edit page">Edit Profile</button>
                     </div>
                   </div>
                 </div>
@@ -21,16 +24,24 @@
               <div class="card mt-3">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
-                    <span class="text-secondary">@bootdey</span>
+                    <h6 class="mb-0">Website</h6>
+                    <span class="text-secondary">ftp://kittonmittons.onion</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
-                    <span class="text-secondary">bootdey</span>
+                    <h6 class="mb-0">Email</h6>
+                    <span class="text-secondary">kitton@kittonmittons.onion</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
-                    <span class="text-secondary">bootdey</span>
+                    <h6 class="mb-0">Mobile</h6>
+                    <span class="text-secondary">(123)456-78910</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">Instagram</h6>
+                    <span class="text-secondary">kittmitton2</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">Facebook</h6>
+                    <span class="text-secondary">sabucher99</span>
                   </li>
                 </ul>
               </div>
@@ -40,43 +51,63 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Website</h6>
+                      <h6 class="mb-0">Who Are We?</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      ftp://kittonmittons.com
+                      Here at Kitton Mittons, we are a home grown, organic family kitten farm that operates under the table!<br>
+                      We offer the best prices on organic kittens to families who don't want to go through all the pesky "shots"
+                      and "safety" that you would normally when adopting.
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
+                      <h6 class="mb-0">Our Values</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      fip@jukmuh.al
+                      We are utterly devoid of any moral compass.
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Mobile</h6>
+                      <h6 class="mb-0">Awards</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      (320) 380-4539
+                      Longest running black market kitten dealers in town, 2020
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
+                      <h6 class="mb-0">Target Market</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Back Alley, NY
+                      We would like to sell to families without kittens.
                     </div>
                   </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Sales Location</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      Back Alleys, NYC
+                    </div>
+                  </div>
+                  <hr>
+                  <!-- <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Current Products</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      Our current product line focuses on people who need cats, without the
+                    </div>
+                  </div> -->
                 </div>
               </div>
               <div class="row gutters-sm">
-                <div class="col-sm-6 mb-3">
+                <!-- <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3">Open Contracts</h6>
@@ -98,11 +129,15 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 mb-3">
+                </div> -->
+                <div class="col-md mb-4">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">Vendor Performance</h6>
+                      <h6 class="d-flex align-items-center mb-3">WeSeller Rating</h6>
+                      <small>Overall</small>
+                      <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
                       <small>Quality</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -124,8 +159,29 @@
                 </div>
               </div>
             </div>
+          <hr>
           </div>
           <hr>
+          <div class="row-gutters">
+            <h1 class="text-center">Active Sales Listings</h1>
+            <Listing
+              productName="Product Name"
+              companyName="Test Co."
+              blurb="A short paragraph describing
+              the product itself. Maybe add a company
+              name here?"
+              :description="text"
+              id="accordion-1" />
+
+            <Listing
+              productName="Product Name"
+              companyName="Test Co."
+              blurb="A short paragraph describing
+              the product itself. Maybe add a company
+              name here?"
+              :description="text"
+              id="accordion-1" />
+          </div>
         </div>
         <hr>
     </div>
@@ -134,8 +190,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Listing from '@/components/Listing.vue';
 
 export default {
+  components: {
+    Listing,
+  },
   computed: {
     ...mapGetters({
       user: 'user',
