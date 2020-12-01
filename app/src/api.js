@@ -80,6 +80,8 @@ export default {
           name,
           listings: []
         });
+
+        this.$router.replace({ name: 'Home' });
       })
       .catch((err) => {
         console.log(err.message);
@@ -106,6 +108,8 @@ export default {
           classification,
           type,
         });
+
+        this.$router.replace({ name: 'Home' });
       })
       .catch((err) => {
         console.log(err.message);
@@ -195,6 +199,8 @@ export default {
         description: listing.description,
         price: listing.price,
         users: [],
+        applications: [],
+        sales: {},
         image: 'https://pbs.twimg.com/profile_images/1285655593592791040/HtwPZgej.jpg',
         vendorId: listing.vendorId,
         })
@@ -213,22 +219,47 @@ export default {
     // params: user id (String), listing id (String)
     // returns isSuccessful (bool)
     Vue.prototype.applyForListing = function (uid, listingId) {
+      let docRef = db.doc(`listings/${listingId}`);
 
+      docRef.update({
+        applications: firebase.firestore.FieldValue.arrayUnion(uid),
+      });
     };
+
+    // getContractorById(): gets a contractor given uid
+    Vue.prototype.getContractorById = async function (uid) {
+      let res = await db.doc(`users/${uid}`).get();
+      let data = res.data();
+
+      return data;
+    }
 
     // acceptContractor(): as vendor, accepts + adds WeSeller
     Vue.prototype.acceptContractor = function (uid, listingId) {
+      let docRef = db.doc(`listings/${listingId}`);
 
+      docRef.update({
+        users: firebase.firestore.FieldValue.arrayUnion(uid),
+        applications: firebase.firestore.FieldValue.arrayRemove(uid)
+      });
     };
 
     // acceptContractor(): as vendor, rejects WeSeller
     Vue.prototype.rejectContractor = function (uid, listingId) {
+      let docRef = db.doc(`listings/${listingId}`);
 
+      docRef.update({
+        applications: firebase.firestore.FieldValue.arrayRemove(uid)
+      });
     };
 
     // logSale(): as user, logs a successful sale
-    Vue.prototype.logSale = function (uid, listingId) {
+    Vue.prototype.logSale = function (uid, listingId, n) {
+      let docRef = db.doc(`listings/${listingId}`);
 
+      docRef.update({
+        sales: { uid: firebase.firestore.FieldValue.increment(n) }
+      });
     };
   },
 }

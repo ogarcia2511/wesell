@@ -54,8 +54,7 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
+      const { email, password } = this.form;
       this.loginUser(email, password);
     },
   },

@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <button @click="onClick">Click</button>
     <img id="logo" alt="WeSell logo" src="../assets/logo.png">
     <h1 v-if="!user.isLoggedIn" class="d-flex justify-content-center">Welcome to WeSell!</h1>
     <h4 v-if="!user.isLoggedIn" class="d-flex justify-content-center" style="color:red">
@@ -31,10 +30,8 @@ export default {
       user: 'user',
     }),
   },
-  methods: {
-    async onClick() {
-      this.listings = await this.getAllListings();
-    },
+  async created() {
+    this.listings = await this.getAllListings();
   },
 };
 </script>
