@@ -1,24 +1,37 @@
 <template>
   <div class="home">
-    <!-- eslint-disable max-len -->
-    <img id="logo" alt="Vue logo" src="../assets/logo.png">
-    <h1 class="d-flex justify-content-center">Welcome to WeSell! Where dreams come true</h1>
-    <h4 class="d-flex justify-content-center" style="color:red">
+    <img id="logo" alt="WeSell logo" src="../assets/logo.png">
+    <h1 v-if="!user.isLoggedIn" class="d-flex justify-content-center">Welcome to WeSell!</h1>
+    <h4 v-if="!user.isLoggedIn" class="d-flex justify-content-center" style="color:red">
       Come check out the hottest things selling right now!
     </h4>
     <br><br>
-    <ListingsList search=""/>
+    <ListingsList v-if="user.isLoggedIn" :listings="this.listings" search=""/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { mapGetters } from 'vuex';
 import ListingsList from '@/components/ListingsList.vue';
 
 export default {
   name: 'Home',
   components: {
     ListingsList,
+  },
+  data() {
+    return {
+      listings: [],
+    };
+  },
+  computed: {
+    ...mapGetters({
+      user: 'user',
+    }),
+  },
+  async created() {
+    this.listings = await this.getAllListings();
   },
 };
 </script>

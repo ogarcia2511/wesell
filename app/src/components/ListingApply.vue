@@ -2,7 +2,7 @@
   <div>
     <b-button v-b-modal="modalId">Apply</b-button>
     <b-modal :id="modalId" title="Apply for this Listing" @ok="handleOk">
-      <b-form @submit.stop.prevent="handleSubmit">
+      <b-form>
         <b-form-group>
 
         </b-form-group>
@@ -21,15 +21,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  props: ['modalId'],
+  props: ['modalId', 'listingId'],
+  computed: {
+    ...mapGetters({
+      user: 'user',
+    }),
+  },
   methods: {
     handleOk(bvModalEvt) {
       bvModalEvt.preventDefault();
-      this.onSubmit(bvModalEvt);
-    },
-    onSubmit(evt) {
-      evt.preventDefault();
+      console.log(this.user.auth.uid);
+      console.log(this.$props.listingId);
+      // this.applyForListing(this.user.auth.uid, this.id);
+      console.log('applied');
     },
   },
 };

@@ -1,7 +1,8 @@
 <template>
   <!-- eslint-disable max-len -->
+    <div>
     <div class="container">
-    <div class="main-body">
+      <div class="main-body">
           <!-- /Breadcrumb -->
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
@@ -52,15 +53,6 @@
                     </div>
                     <div class="col-sm-9 text-secondary">
                       fip@jukmuh.al
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      (239) 816-9029
                     </div>
                   </div>
                   <hr>
@@ -133,9 +125,24 @@
               </div>
             </div>
           </div>
+          <hr>
         </div>
+        <hr>
+    </div>
     </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters({
+      user: 'user',
+    }),
+  },
+};
+</script>
 
 <style scoped>
     body{

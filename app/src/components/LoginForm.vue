@@ -1,22 +1,32 @@
 <template>
-  <div class="container">
-    <h1 class="d-flex justify-content-center">Hello, welcome back to WeSell!</h1>
+  <div class="root col-sm-6">
+    <h3>Welcome Back!</h3>
     <br>
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
-    <form @submit="onSubmit">
-        <ul>
-            <li class="d-flex justify-content-center">
-                <label for="email">Email: </label>
-                <input type="email" id="email" name="email" required><br>
-            </li><br>
-            <li class="d-flex justify-content-center">
-                <label for="Password">Password:</label>
-                <input type="password" id="pass" name="password" required><br>
-            </li><br>
-            <li class="d-flex justify-content-center button">
-                <button type="submit">Login</button>
-            </li>
-            <br><br>
+    <b-form @submit="onSubmit">
+            <b-form-group
+        id="input-group-1"
+        label="Email address:"
+        label-for="input-1"
+        ><b-form-input
+          id="input-1"
+          v-model="form.email"
+          type="email"
+          required
+          ></b-form-input>
+      </b-form-group>
+      <b-form-group
+        id="input-group-2"
+        label="Password:"
+        label-for="input-2"
+        ><b-form-input
+          type="password"
+          id="input-2"
+          v-model="form.password"
+          required
+          ></b-form-input>
+      </b-form-group>
+            <b-button class="submit-btn" type="submit" variant="primary">Submit</b-button>
             <li class="nav-item d-flex justify-content-center">
                 <router-link class="nav-link" active-class="active" to="/register">
                    New User? Register here!
@@ -24,8 +34,7 @@
             </li>
             <!--TODO: Implement forgot password functionality -->
             <p class="d-flex justify-content-center">Forgot password?</p>
-        </ul>
-    </form>
+    </b-form>
   </div>
 </template>
 
@@ -35,14 +44,17 @@ export default {
   data() {
     return {
       error: null,
+      form: {
+        email: '',
+        password: '',
+      },
     };
   },
   props: {},
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
+      const { email, password } = this.form;
       this.loginUser(email, password);
     },
   },
@@ -51,18 +63,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.root {
+  margin: auto;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.submit-btn {
+  margin: 10px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.reset-btn {
+  margin: 10px;
 }
 </style>

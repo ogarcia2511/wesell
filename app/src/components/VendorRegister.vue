@@ -90,9 +90,11 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
-      this.registerVendor(email, password);
+      const { email } = this.form;
+      const { password } = this.form;
+      const { name } = this.form;
+      const { classification } = this.form;
+      this.registerVendor(email, password, name, classification);
     },
     onReset(evt) {
       evt.preventDefault();

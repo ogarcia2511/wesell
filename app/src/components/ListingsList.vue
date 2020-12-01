@@ -20,33 +20,14 @@
       </b-col>
     </b-row>
     <hr>
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-1" />
-
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-2" />
-
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-3" />
-
+    <Listing v-for="listing in listings" :key="listing.id"
+      :productName="listing.productName"
+      :companyName="listing.companyName"
+      :blurb="listing.blurb"
+      :description="listing.description"
+      :id="listing.id"
+      :image="listing.image"
+      :price="listing.price" />
   </div>
 </template>
 
@@ -55,7 +36,7 @@ import Listing from '@/components/Listing.vue';
 
 export default {
   components: { Listing },
-  props: ['search'],
+  props: ['query', 'listings'],
   data() {
     return {
       text: `

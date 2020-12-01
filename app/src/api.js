@@ -3,6 +3,7 @@
 
 //import firebase so it can be used here
 import firebase from 'firebase';
+import store from './store';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDvQi2fZdSawJCkCH9bgB05XXiU5q2_tR8',
@@ -17,12 +18,40 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-
 //file global constant used to interact with the databases
-const database = firebase.firestore();
+const db = firebase.firestore();
+// const admin = require('firebase-admin');
+// const fieldValue = admin.firestore.FieldValue;
+
+firebase.auth().onAuthStateChanged((user) => {
+  let data = null;
+
+  if (user) {
+    db.doc(`users/${user.uid}`)
+      .get()
+      .then((res) => { store.dispatch("setData", res.data()); });
+  } else {
+    data = null;
+    store.dispatch("setData", data);
+  }
+
+  store.dispatch("setUser", user);
+});
+
 
 export default {
   install(Vue, options) {
+
+    Vue.prototype.signOut = function () {
+      firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        this.$router.go({
+          name: "Home"
+        });
+      });
+    };
 
     // registerVendor(): registers a vendor account
     // params: email (String), name (String), password (String), classification (number), type (boolean)
@@ -36,13 +65,23 @@ export default {
       .then((cred) => {
         const { user } = cred;
 
-        if (user) {
-          user.updateProfile({
-            name,
-            classification,
-            type
-          });
-        }
+        db.collection("users")
+        .doc(user.uid)
+        .set({
+          name,
+          classification,
+          type,
+        });
+
+        db.collection("vendors")
+        .doc(user.uid)
+        .set({
+          email,
+          name,
+          listings: []
+        });
+
+        this.$router.replace({ name: 'Home' });
       })
       .catch((err) => {
         console.log(err.message);
@@ -61,14 +100,16 @@ export default {
       .then((cred) => {
         const { user } = cred;
 
-        if (user) {
-          user.updateProfile({
-            name,
-            birthday,
-            classification,
-            type
-          });
-        }
+        db.collection("users")
+        .doc(user.uid)
+        .set({
+          name,
+          birthday,
+          classification,
+          type,
+        });
+
+        this.$router.replace({ name: 'Home' });
       })
       .catch((err) => {
         console.log(err.message);
@@ -97,10 +138,9 @@ export default {
       - blurb (String)
       - description (String)
       - vendor id (number)
-      - vendor name (String)
       - main image (String -- link to image)
       - expected price per sale (number)
-      -
+      - users: Array of [ WeSellers id ]
     */
 
     // individual product pages are low priority and prob out of scope but
@@ -116,29 +156,111 @@ export default {
     // getAllListings(): gets all listings
     // params: none
     // returns list of [ listing ]
-    Vue.getAllListings = function () {
-
+    Vue.prototype.getAllListings = async function () {
+      const snapshot = await db.collection('listings').get();
+      return snapshot.docs.map(doc => doc.data());
     };
 
     // getListingById(): gets a listing by ID
     // params: listing id (number)
-    // returns listing
-    Vue.getListingById = function () {
-
+    // returns listing , returns null if no listing is found
+    Vue.prototype.getListingById = async function (id) {
+      const res = await db.collection('listings').doc(`${id}`).get();
+      if (res.exists) {
+        return res.data();
+      } else {
+        return null;
+      }
     };
 
     // getListingsByOwner(): gets all listings by a specific vendor
     // params: user id (number)
     // returns list of [ listing ]
-    Vue.getListingsByOwner = function () {
+    Vue.getListingsByOwner = async function (vendorId) {
+      let res = await db.doc(`vendors/${vendorId}`).get();
+      let data = res.data();
 
+      return data.listings;
     };
 
     // createNewListing(): creates a new listing
     // params: listing
     // returns isSuccessful (boolean)
-    Vue.createNewListing = function () {
+    Vue.prototype.createNewListing = function (listing) {
+      let docRef = db.collection('listings').doc();
+      const listingId = docRef.id;
+      console.log(listing);
+      console.log(docRef.id);
+      docRef.set({
+        id: listingId,
+        productName: listing.productName,
+        companyName: listing.companyName,
+        blurb: listing.blurb,
+        description: listing.description,
+        price: listing.price,
+        users: [],
+        applications: [],
+        sales: {},
+        image: 'https://pbs.twimg.com/profile_images/1285655593592791040/HtwPZgej.jpg',
+        vendorId: listing.vendorId,
+        })
+        .catch(err => {
+        console.log(err);
+      });
 
+      console.log("listing created!");
+      docRef = db.doc(`vendors/${listing.vendorId}`);
+      docRef.update({
+        listings: firebase.firestore.FieldValue.arrayUnion(listingId),
+      });
+    };
+
+    // applyForListing(): as a WeSeller, makes a request to join a listing
+    // params: user id (String), listing id (String)
+    // returns isSuccessful (bool)
+    Vue.prototype.applyForListing = function (uid, listingId) {
+      let docRef = db.doc(`listings/${listingId}`);
+
+      docRef.update({
+        applications: firebase.firestore.FieldValue.arrayUnion(uid),
+      });
+    };
+
+    // getContractorById(): gets a contractor given uid
+    Vue.prototype.getContractorById = async function (uid) {
+      let res = await db.doc(`users/${uid}`).get();
+      let data = res.data();
+
+      return data;
+    }
+
+    // acceptContractor(): as vendor, accepts + adds WeSeller
+    Vue.prototype.acceptContractor = function (uid, listingId) {
+      let docRef = db.doc(`listings/${listingId}`);
+
+      docRef.update({
+        users: firebase.firestore.FieldValue.arrayUnion(uid),
+        applications: firebase.firestore.FieldValue.arrayRemove(uid)
+      });
+    };
+
+    // acceptContractor(): as vendor, rejects WeSeller
+    Vue.prototype.rejectContractor = function (uid, listingId) {
+      let docRef = db.doc(`listings/${listingId}`);
+
+      docRef.update({
+        applications: firebase.firestore.FieldValue.arrayRemove(uid)
+      });
+    };
+
+    // logSale(): as user, logs a successful sale
+    Vue.prototype.logSale = function (uid, listingId, n) {
+      let docRef = db.doc(`listings/${listingId}`);
+
+      docRef.update({
+        sales: { uid: firebase.firestore.FieldValue.increment(n) }
+      });
     };
   },
 }
+
