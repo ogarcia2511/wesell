@@ -33,9 +33,7 @@ export default {
   methods: {
     handleOk(bvModalEvt) {
       bvModalEvt.preventDefault();
-      console.log(this.user.auth.uid);
-      console.log(this.$props.listingId);
-      // this.applyForListing(this.user.auth.uid, this.id);
+      this.applyForListing(this.user.auth.uid, this.listingId);
       console.log('applied');
     },
   },

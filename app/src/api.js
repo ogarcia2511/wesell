@@ -176,10 +176,13 @@ export default {
     // getListingsByOwner(): gets all listings by a specific vendor
     // params: user id (number)
     // returns list of [ listing ]
-    Vue.getListingsByOwner = async function (vendorId) {
+    Vue.prototype.getListingsByOwner = async function (vendorId) {
+      console.log("click")
       let res = await db.doc(`vendors/${vendorId}`).get();
+      console.log(res);
       let data = res.data();
 
+      console.log(data.listings);
       return data.listings;
     };
 
@@ -242,6 +245,10 @@ export default {
         users: firebase.firestore.FieldValue.arrayUnion(uid),
         applications: firebase.firestore.FieldValue.arrayRemove(uid)
       });
+
+      this.$router.go({
+        name: "Home"
+      });
     };
 
     // acceptContractor(): as vendor, rejects WeSeller
@@ -250,6 +257,10 @@ export default {
 
       docRef.update({
         applications: firebase.firestore.FieldValue.arrayRemove(uid)
+      });
+
+      this.$router.go({
+        name: "Home"
       });
     };
 

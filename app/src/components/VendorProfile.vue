@@ -15,7 +15,7 @@
                       <p class="text-secondary mb-1">Mittons for Kittons!</p>
                       <p class="text-muted font-size-sm">Bronx, NY</p>
                       <!-- TODO: Only show these if owner of profile -->
-                      <button action="TODO: Open new listing page">Create New Listing</button><br><br>
+                      <button><router-link to="/create">Create New Listing</router-link></button><br><br>
                       <button action="TODO: Open edit page">Edit Profile</button>
                     </div>
                   </div>
@@ -163,6 +163,7 @@
           <hr>
           <div class="row-gutters">
             <h1 class="text-center">Active Sales Listings</h1>
+<<<<<<< Updated upstream
             <Listing
               productName="Kitton Mitton Gen 1"
               companyName="kittonmitton Inc."
@@ -176,9 +177,29 @@
               blurb="Our special synthetic fiber design cushions all kitten sounds in this exciting new product!"
               :description="text"
               id="accordion-1" />
+=======
+            <Listing v-for="listing in listings" :key="listing.id"
+              :productName="listing.productName"
+              :companyName="listing.companyName"
+              :blurb="listing.blurb"
+              :description="listing.description"
+              :id="listing.id"
+              :image="listing.image"
+              :price="listing.price" />
+>>>>>>> Stashed changes
           </div>
         </div>
         <hr>
+        <div class="row-gutters">
+          <h2 class="text-center">Incoming Applications</h2>
+          <li>
+            <ul v-for="app in applications" :key="app.id">
+              {{ app.name }}, {{ app.users }}
+              <b-button @click="this.acceptContractor(app.name, app.users[0])">Accept</b-button>
+              <b-button @click="this.rejectContractor(app.name, app.users[0])">Reject</b-button>
+            </ul>
+          </li>
+        </div>
     </div>
     </div>
 </template>
@@ -188,6 +209,12 @@ import { mapGetters } from 'vuex';
 import Listing from '@/components/Listing.vue';
 
 export default {
+  data() {
+    return {
+      listings: [],
+      applications: [],
+    };
+  },
   components: {
     Listing,
   },
@@ -195,6 +222,21 @@ export default {
     ...mapGetters({
       user: 'user',
     }),
+  },
+  async created() {
+    const listingIds = await this.getListingsByOwner(this.user.auth.uid);
+
+    listingIds.forEach((listingId) => {
+      this.getListingById(listingId)
+        .then((res) => {
+          this.listings.push(res);
+          this.applications.push({ id: res.id, name: res.productName, users: res.applications });
+        });
+
+      this.listings.forEach(() => {
+        this.applications.set('3', '1');
+      });
+    });
   },
 };
 </script>
