@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     user: {
       isLoggedIn: false,
+      auth: null,
       data: null,
     },
   },
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     setLoggedIn(state, value) {
       state.user.isLoggedIn = value;
     },
+    setAuth(state, auth) {
+      state.user.auth = auth;
+    },
     setData(state, data) {
       state.user.data = data;
     },
@@ -28,13 +32,23 @@ export default new Vuex.Store({
       commit('setLoggedIn', user !== null);
 
       if (user) {
-        commit('setData', {
-          uid: user.uid,
-          email: user.email,
-        });
+        if (user.type === 0) {
+          commit('setAuth', {
+            uid: user.uid,
+            email: user.email,
+          });
+        } else {
+          commit('setAuth', {
+            uid: user.uid,
+            email: user.email,
+          });
+        }
       } else {
-        commit('setData', null);
+        commit('setAuth', null);
       }
+    },
+    setData({ commit }, data) {
+      commit('setData', data);
     },
   },
   modules: {
