@@ -12,8 +12,8 @@
                     <img src="https://cdn.searchenginejournal.com/wp-content/uploads/2018/04/businesses-need-seo-760x400.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4>Kitton Mittons</h4>
-                      <p class="text-secondary mb-1">Black Market Kitten Dealership</p>
-                      <p class="text-muted font-size-sm">Back Alley, NY</p>
+                      <p class="text-secondary mb-1">Mittons for Kittons!</p>
+                      <p class="text-muted font-size-sm">Bronx, NY</p>
                       <!-- TODO: Only show these if owner of profile -->
                       <button action="TODO: Open new listing page">Create New Listing</button><br><br>
                       <button action="TODO: Open edit page">Edit Profile</button>
@@ -54,9 +54,8 @@
                       <h6 class="mb-0">Who Are We?</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Here at Kitton Mittons, we are a home grown, organic family kitten farm that operates under the table!<br>
-                      We offer the best prices on organic kittens to families who don't want to go through all the pesky "shots"
-                      and "safety" that you would normally when adopting.
+                      Here at Kitton Mittons, we are a home grown, organic family kitten mitten weavers!<br>
+                      We offer the best prices on organic kittens to families who want quiet kitties without the waste!
                     </div>
                   </div>
                   <hr>
@@ -65,7 +64,7 @@
                       <h6 class="mb-0">Our Values</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      We are utterly devoid of any moral compass.
+                      We value reusability, recycling, and sustainable operations for our production.
                     </div>
                   </div>
                   <hr>
@@ -74,7 +73,7 @@
                       <h6 class="mb-0">Awards</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Longest running black market kitten dealers in town, 2020
+                      "Most innovative design" - Forbes Magazine, 2020
                     </div>
                   </div>
                   <hr>
@@ -83,7 +82,7 @@
                       <h6 class="mb-0">Target Market</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      We would like to sell to families without kittens.
+                      We would like to sell to families with kittens that are loud with their feet.
                     </div>
                   </div>
                   <hr>
@@ -92,7 +91,7 @@
                       <h6 class="mb-0">Sales Location</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Back Alleys, NYC
+                      New York City, NY: Door to Door
                     </div>
                   </div>
                   <hr>
@@ -165,20 +164,16 @@
           <div class="row-gutters">
             <h1 class="text-center">Active Sales Listings</h1>
             <Listing
-              productName="Product Name"
-              companyName="Test Co."
-              blurb="A short paragraph describing
-              the product itself. Maybe add a company
-              name here?"
+              productName="Kitton Mitton Gen 1"
+              companyName="kittonmitton Inc."
+              blurb="Mittens that make your cat quiet!"
               :description="text"
               id="accordion-1" />
 
             <Listing
-              productName="Product Name"
-              companyName="Test Co."
-              blurb="A short paragraph describing
-              the product itself. Maybe add a company
-              name here?"
+              productName="Kitton Mitton Gen 2"
+              companyName="kittonmitton Inc."
+              blurb="Our special synthetic fiber design cushions all kitten sounds in this exciting new product!"
               :description="text"
               id="accordion-1" />
           </div>
