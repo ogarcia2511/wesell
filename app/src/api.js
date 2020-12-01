@@ -106,7 +106,7 @@ export default {
     };
 
     /* object definition: listing (what users see at a glance)
-      - listing id (number) <-- primary key from db
+      - id (number) <-- primary key from db
       - product name (String)
       - company name (String)
       - blurb (String)
@@ -137,9 +137,29 @@ export default {
 
     // getListingById(): gets a listing by ID
     // params: listing id (number)
-    // returns listing
-    Vue.getListingById = function () {
-
+    // returns listing , returns null if no listing is found
+    Vue.prototype.getListingById = function (id) {
+      const result = db.collection('listings').doc(`${id}`).get()
+        .then(docSnapshot =>{
+          if (docSnapshot.exists){
+            console.log("document data: ", docSnapshot.data());
+            return docSnapshot.data();
+          }else{
+            console.log("no such document");
+            return null;
+          }
+        }).catch(err=>{
+          console.log(err);
+          return null;
+        });
+      
+      const getResult = async () => {
+        const a = await result;
+        console.log(a);
+        return a ;
+      }
+      return getResult();
+    
     };
 
     // getListingsByOwner(): gets all listings by a specific vendor
@@ -152,7 +172,23 @@ export default {
     // createNewListing(): creates a new listing
     // params: listing
     // returns isSuccessful (boolean)
-    Vue.createNewListing = function () {
+    Vue.prototype.createNewListing = function (listing) {
+      
+      const tempdocRef = db.collection('listings').doc();
+      const listingID = tempdocRef.id;
+      listing.id = listingID;
+      console.log(listing);
+      db.doc(`listings/${listing.id}`)
+        .set({
+          id: listing.id,
+          productName: listing.productName,
+          blurb: listing.blurb,
+          description: listing.description,
+          price: listing.price
+          })
+          .catch(err => {
+          console.log(err);
+        });
 
     };
   },
