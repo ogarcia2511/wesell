@@ -11,7 +11,9 @@
             <p>{{ blurb }}</p>
           </b-col>
           <b-col cols="4" class="text-right">
-            <button disabled class="price-box border border-success rounded">$100.00/sale</button>
+            <button disabled class="price-box border border-success rounded">
+              ${{ price }}/sale
+            </button>
           </b-col>
         </b-row>
       </b-card-header>
@@ -19,7 +21,7 @@
         <b-card-body>
           <b-row>
           <b-col cols="4">
-            <b-card-img thumbnail fluid src="https://pbs.twimg.com/profile_images/1285655593592791040/HtwPZgej.jpg"/>
+            <b-card-img thumbnail fluid :src="image" />
           </b-col>
           <b-col cols="8">
             <template v-if="user.isLoggedIn && user.data.type == 1">
@@ -43,7 +45,7 @@ import ListingApply from '@/components/ListingApply.vue';
 
 export default {
   components: { ListingApply },
-  props: ['id', 'productName', 'companyName', 'blurb', 'description', 'photoLink'],
+  props: ['id', 'productName', 'companyName', 'blurb', 'description', 'image', 'price'],
   data() {
     return {
       modalId: `m${this.id}`,

@@ -1,12 +1,13 @@
 <template>
   <div class="home">
+    <button @click="onClick">Click</button>
     <img id="logo" alt="WeSell logo" src="../assets/logo.png">
     <h1 v-if="!user.isLoggedIn" class="d-flex justify-content-center">Welcome to WeSell!</h1>
     <h4 v-if="!user.isLoggedIn" class="d-flex justify-content-center" style="color:red">
       Come check out the hottest things selling right now!
     </h4>
     <br><br>
-    <ListingsList v-if="user.isLoggedIn" search=""/>
+    <ListingsList v-if="user.isLoggedIn" :listings="this.listings" search=""/>
   </div>
 </template>
 
@@ -20,10 +21,20 @@ export default {
   components: {
     ListingsList,
   },
+  data() {
+    return {
+      listings: [],
+    };
+  },
   computed: {
     ...mapGetters({
       user: 'user',
     }),
+  },
+  methods: {
+    async onClick() {
+      this.listings = await this.getAllListings();
+    },
   },
 };
 </script>

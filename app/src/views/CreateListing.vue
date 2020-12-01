@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
@@ -85,9 +87,19 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters({
+      user: 'user',
+    }),
+  },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
+      const listing = this.form;
+      listing.companyName = this.user.data.name;
+      listing.vendorId = this.user.auth.uid;
+      listing.price = this.form.price.toString();
+      this.createNewListing(listing);
     },
     onReset(evt) {
       evt.preventDefault();

@@ -20,6 +20,8 @@ firebase.initializeApp(firebaseConfig);
 
 //file global constant used to interact with the databases
 const db = firebase.firestore();
+// const admin = require('firebase-admin');
+// const fieldValue = admin.firestore.FieldValue;
 
 firebase.auth().onAuthStateChanged((user) => {
   let data = null;
@@ -69,6 +71,14 @@ export default {
           name,
           classification,
           type,
+        });
+
+        db.collection("vendors")
+        .doc(user.uid)
+        .set({
+          email,
+          name,
+          listings: []
         });
       })
       .catch((err) => {
@@ -142,65 +152,61 @@ export default {
     // getAllListings(): gets all listings
     // params: none
     // returns list of [ listing ]
-    Vue.getAllListings = function () {
-
+    Vue.prototype.getAllListings = async function () {
+      const snapshot = await db.collection('listings').get();
+      return snapshot.docs.map(doc => doc.data());
     };
 
     // getListingById(): gets a listing by ID
     // params: listing id (number)
     // returns listing , returns null if no listing is found
-    Vue.prototype.getListingById = function (id) {
-      const result = db.collection('listings').doc(`${id}`).get()
-        .then(docSnapshot =>{
-          if (docSnapshot.exists){
-            console.log("document data: ", docSnapshot.data());
-            return docSnapshot.data();
-          }else{
-            console.log("no such document");
-            return null;
-          }
-        }).catch(err=>{
-          console.log(err);
-          return null;
-        });
-      
-      const getResult = async () => {
-        const a = await result;
-        console.log(a);
-        return a ;
+    Vue.prototype.getListingById = async function (id) {
+      const res = await db.collection('listings').doc(`${id}`).get();
+      if (res.exists) {
+        return res.data();
+      } else {
+        return null;
       }
-      return getResult();
-    
     };
 
     // getListingsByOwner(): gets all listings by a specific vendor
     // params: user id (number)
     // returns list of [ listing ]
-    Vue.getListingsByOwner = function () {
+    Vue.getListingsByOwner = async function (vendorId) {
+      let res = await db.doc(`vendors/${vendorId}`).get();
+      let data = res.data();
 
+      return data.listings;
     };
 
     // createNewListing(): creates a new listing
     // params: listing
     // returns isSuccessful (boolean)
     Vue.prototype.createNewListing = function (listing) {
-      
-      const tempdocRef = db.collection('listings').doc();
-      const listingID = tempdocRef.id;
-      listing.id = listingID;
+      let docRef = db.collection('listings').doc();
+      const listingId = docRef.id;
       console.log(listing);
-      db.doc(`listings/${listing.id}`)
-        .set({
-          id: listing.id,
-          productName: listing.productName,
-          blurb: listing.blurb,
-          description: listing.description,
-          price: listing.price
-          })
-          .catch(err => {
-          console.log(err);
-        });
+      console.log(docRef.id);
+      docRef.set({
+        id: listingId,
+        productName: listing.productName,
+        companyName: listing.companyName,
+        blurb: listing.blurb,
+        description: listing.description,
+        price: listing.price,
+        users: [],
+        image: 'https://pbs.twimg.com/profile_images/1285655593592791040/HtwPZgej.jpg',
+        vendorId: listing.vendorId,
+        })
+        .catch(err => {
+        console.log(err);
+      });
 
+      console.log("listing created!");
+      docRef = db.doc(`vendors/${listing.vendorId}`);
+      docRef.update({
+        listings: firebase.firestore.FieldValue.arrayUnion(listingId),
+      });
     };
   },
 }
