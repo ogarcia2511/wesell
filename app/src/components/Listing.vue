@@ -25,7 +25,7 @@
           </b-col>
           <b-col cols="8">
             <template v-if="user.isLoggedIn && user.data.type == 1">
-              <ListingApply :modalId="modalId" />
+              <ListingApply :modalId="modalId" :listingId="id" />
             </template>
             <b-card-text>
               I start opened because <code>visible</code> is <code>true</code>
