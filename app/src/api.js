@@ -208,6 +208,28 @@ export default {
         listings: firebase.firestore.FieldValue.arrayUnion(listingId),
       });
     };
+
+    // applyForListing(): as a WeSeller, makes a request to join a listing
+    // params: user id (String), listing id (String)
+    // returns isSuccessful (bool)
+    Vue.prototype.applyForListing = function (uid, listingId) {
+
+    };
+
+    // acceptContractor(): as vendor, accepts + adds WeSeller
+    Vue.prototype.acceptContractor = function (uid, listingId) {
+
+    };
+
+    // acceptContractor(): as vendor, rejects WeSeller
+    Vue.prototype.rejectContractor = function (uid, listingId) {
+
+    };
+
+    // logSale(): as user, logs a successful sale
+    Vue.prototype.logSale = function (uid, listingId) {
+
+    };
   },
 }
 
