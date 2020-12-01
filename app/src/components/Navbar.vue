@@ -21,12 +21,22 @@
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown right>
-          <template #button-content>User</template>
-          <b-dropdown-item><router-link style="color:black" to="/profile">My Profile</router-link></b-dropdown-item>
-          <b-dropdown-item><router-link style="color:black" to="/mylistings">My Listings</router-link></b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-        </b-nav-item-dropdown>
+        <template v-if="user.isLoggedIn">
+          <b-nav-item-dropdown right>
+              <template #button-content>{{ user.data.email }}</template>
+              <b-dropdown-item><router-link style="color:black" to="/profile">My Profile</router-link></b-dropdown-item>
+              <b-dropdown-item><router-link style="color:black" to="/mylistings">My Listings</router-link></b-dropdown-item>
+              <b-dropdown-item><b-button style="color:black" to ="/" @click.prevent="onSignOut">Sign Out</b-button></b-dropdown-item>
+          </b-nav-item-dropdown>
+        </template>
+        <template v-else>
+          <li class="nav-item">
+            <router-link class="nav-link" active-class="active" to="/register">Register</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" active-class="active" to="/login">Login</router-link>
+          </li>
+        </template>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -34,8 +44,19 @@
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
 
+export default {
+  computed: {
+    ...mapGetters({
+      user: 'user',
+    }),
+  },
+  methods: {
+    onSignOut() {
+      this.signOut();
+    },
+  },
 };
 </script>
 

@@ -3,6 +3,7 @@
 
 //import firebase so it can be used here
 import firebase from 'firebase';
+import store from './store';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDvQi2fZdSawJCkCH9bgB05XXiU5q2_tR8',
@@ -17,12 +18,26 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("setUser", user);
+});
 
 //file global constant used to interact with the databases
-const database = firebase.firestore();
+const db = firebase.firestore();
 
 export default {
   install(Vue, options) {
+
+    Vue.prototype.signOut = function () {
+      firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        this.$router.go({
+          name: "Home"
+        });
+      });
+    };
 
     // registerVendor(): registers a vendor account
     // params: email (String), name (String), password (String), classification (number), type (boolean)
@@ -36,13 +51,13 @@ export default {
       .then((cred) => {
         const { user } = cred;
 
-        if (user) {
-          user.updateProfile({
-            name,
-            classification,
-            type
-          });
-        }
+        db.collection("users")
+        .add({
+          uid: user.uid,
+          name,
+          classification,
+          type,
+        });
       })
       .catch((err) => {
         console.log(err.message);
@@ -61,14 +76,14 @@ export default {
       .then((cred) => {
         const { user } = cred;
 
-        if (user) {
-          user.updateProfile({
-            name,
-            birthday,
-            classification,
-            type
-          });
-        }
+        db.collection("users")
+        .add({
+          uid: user.uid,
+          name,
+          birthday,
+          classification,
+          type,
+        });
       })
       .catch((err) => {
         console.log(err.message);
