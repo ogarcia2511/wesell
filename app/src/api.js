@@ -177,12 +177,9 @@ export default {
     // params: user id (number)
     // returns list of [ listing ]
     Vue.prototype.getListingsByOwner = async function (vendorId) {
-      console.log("click")
       let res = await db.doc(`vendors/${vendorId}`).get();
-      console.log(res);
       let data = res.data();
 
-      console.log(data.listings);
       return data.listings;
     };
 
@@ -216,6 +213,10 @@ export default {
       docRef.update({
         listings: firebase.firestore.FieldValue.arrayUnion(listingId),
       });
+
+      this.$router.go({
+        name: "Home"
+      });
     };
 
     // applyForListing(): as a WeSeller, makes a request to join a listing
@@ -238,7 +239,7 @@ export default {
     }
 
     // acceptContractor(): as vendor, accepts + adds WeSeller
-    Vue.prototype.acceptContractor = function (uid, listingId) {
+    Vue.prototype.acceptContractor = function (listingId, uid) {
       let docRef = db.doc(`listings/${listingId}`);
 
       docRef.update({
@@ -252,7 +253,7 @@ export default {
     };
 
     // acceptContractor(): as vendor, rejects WeSeller
-    Vue.prototype.rejectContractor = function (uid, listingId) {
+    Vue.prototype.rejectContractor = function (listingId, uid) {
       let docRef = db.doc(`listings/${listingId}`);
 
       docRef.update({
@@ -272,6 +273,14 @@ export default {
         sales: { uid: firebase.firestore.FieldValue.increment(n) }
       });
     };
+
+    Vue.prototype.removeListing = function (listingId) {
+      db.doc(`listings/${listingId}`).delete();
+
+      this.$router.go({
+        name: "Home"
+      });
+    }
   },
 }
 

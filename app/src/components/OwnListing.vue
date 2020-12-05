@@ -22,10 +22,18 @@
             <b-card-img thumbnail fluid :src="image" />
           </b-col>
           <b-col cols="8">
-            <template v-if="user.isLoggedIn && user.data.type == 1">
-              <ListingApply :modalId="modalId" :listingId="id" />
-            </template>
+            <b-button class="btn btn-danger" @click="removeListing(id)">
+                Remove Listing
+            </b-button>
             <b-card-text>{{ description }}</b-card-text>
+            <hr>
+            <h5>WeSellers</h5>
+            <b-list-group v-if="users.length > 0">
+                <b-list-group-item v-for="user in users" :key="user">
+                    {{ idToNameMap[user] }}
+                </b-list-group-item>
+            </b-list-group>
+            <p v-else>No WeSellers found for this listing.</p>
           </b-col>
           </b-row>
         </b-card-body>
@@ -36,11 +44,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ListingApply from '@/components/ListingApply.vue';
 
 export default {
-  components: { ListingApply },
-  props: ['id', 'productName', 'companyName', 'blurb', 'description', 'image', 'price'],
+  props: ['id', 'productName', 'companyName', 'blurb', 'description', 'image', 'price', 'users', 'idToNameMap'],
   data() {
     return {
       modalId: `m${this.id}`,

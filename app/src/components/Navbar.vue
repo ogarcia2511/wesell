@@ -19,7 +19,7 @@
           <b-nav-item-dropdown right>
               <template #button-content>{{ user.data.name }} ({{ user.auth.email }})</template>
               <b-dropdown-item><router-link style="color:black" to="/profile">My Profile</router-link></b-dropdown-item>
-              <b-dropdown-item v-if="user.data.type == 0">
+              <b-dropdown-item>
                 <router-link style="color:black" to="/mylistings">My Listings</router-link>
               </b-dropdown-item>
               <b-dropdown-item><b-button style="color:black" to ="/" @click.prevent="onSignOut">Sign Out</b-button></b-dropdown-item>

@@ -158,65 +158,29 @@
                 </div>
               </div>
             </div>
-          <hr>
-          </div>
-          <hr>
-          <div class="row-gutters">
-            <h1 class="text-center">Active Sales Listings</h1>
-<<<<<<< Updated upstream
-            <Listing
-              productName="Kitton Mitton Gen 1"
-              companyName="kittonmitton Inc."
-              blurb="Mittens that make your cat quiet!"
-              :description="text"
-              id="accordion-1" />
-
-            <Listing
-              productName="Kitton Mitton Gen 2"
-              companyName="kittonmitton Inc."
-              blurb="Our special synthetic fiber design cushions all kitten sounds in this exciting new product!"
-              :description="text"
-              id="accordion-1" />
-=======
-            <Listing v-for="listing in listings" :key="listing.id"
-              :productName="listing.productName"
-              :companyName="listing.companyName"
-              :blurb="listing.blurb"
-              :description="listing.description"
-              :id="listing.id"
-              :image="listing.image"
-              :price="listing.price" />
->>>>>>> Stashed changes
           </div>
         </div>
         <hr>
-        <div class="row-gutters">
-          <h2 class="text-center">Incoming Applications</h2>
-          <li>
-            <ul v-for="app in applications" :key="app.id">
-              {{ app.name }}, {{ app.users }}
-              <b-button @click="this.acceptContractor(app.name, app.users[0])">Accept</b-button>
-              <b-button @click="this.rejectContractor(app.name, app.users[0])">Reject</b-button>
-            </ul>
-          </li>
-        </div>
+        <h1 class="text-center">Incoming Applications</h1>
+        <ApplicationsTable :applications="this.applications" :idToNameMap="this.appIdToNameMap" />
     </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import Listing from '@/components/Listing.vue';
+import ApplicationsTable from '@/components/ApplicationsTable.vue';
 
 export default {
   data() {
     return {
       listings: [],
       applications: [],
+      appIdToNameMap: {},
     };
   },
   components: {
-    Listing,
+    ApplicationsTable,
   },
   computed: {
     ...mapGetters({
@@ -225,18 +189,32 @@ export default {
   },
   async created() {
     const listingIds = await this.getListingsByOwner(this.user.auth.uid);
+    const promises = [];
 
     listingIds.forEach((listingId) => {
-      this.getListingById(listingId)
-        .then((res) => {
-          this.listings.push(res);
-          this.applications.push({ id: res.id, name: res.productName, users: res.applications });
-        });
-
-      this.listings.forEach(() => {
-        this.applications.set('3', '1');
-      });
+      promises.push(this.getListingById(listingId));
     });
+
+    Promise.all(promises)
+      .then((res) => {
+        for (let i = 0; i < res.length; i += 1) {
+          this.listings.push(res[i]);
+          this.applications.push({
+            id: res[i].id,
+            name: res[i].productName,
+            users: res[i].applications,
+          });
+        }
+
+        this.applications.forEach((app) => {
+          app.users.forEach((uid) => {
+            this.getContractorById(uid)
+              .then((r) => {
+                this.$set(this.appIdToNameMap, uid, r.name);
+              });
+          });
+        });
+      });
   },
 };
 </script>

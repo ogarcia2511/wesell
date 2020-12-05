@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user.isLoggedIn" class="home">
+  <div v-if="user.isLoggedIn">
     <template v-if="user.data.type == 0">
       <VendorProfile />
     </template>

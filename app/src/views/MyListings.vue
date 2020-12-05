@@ -1,23 +1,30 @@
 <template>
-  <div class="home">
-      <!-- TODO: Hide and show dynamically based on profile type -->
-    <h1>WeSeller View   </h1>
-    <WeSellerListings/>
-    <h1>Vendor View</h1>
-    <VendorListings/>
+  <div v-if="user.isLoggedIn">
+    <template v-if="user.data.type == 0">
+      <VendorListings />
+    </template>
+    <template v-if="user.data.type == 1">
+      <ContractorListings />
+    </template>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import WeSellerListings from '@/components/WeSellerListings.vue';
+import { mapGetters } from 'vuex';
+import ContractorListings from '@/components/ContractorListings.vue';
 import VendorListings from '@/components/VendorListings.vue';
 
 export default {
   name: 'MyListings',
   components: {
-    WeSellerListings,
+    ContractorListings,
     VendorListings,
+  },
+  computed: {
+    ...mapGetters({
+      user: 'user',
+    }),
   },
 };
 </script>
