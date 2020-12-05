@@ -62,10 +62,10 @@
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <h6 class="mb-0">Mobile</h6>
+                  <h6 class="mb-0">Birthday</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  (320) 380-4539
+                  {{ user.data.birthday }}
                 </div>
               </div>
               <hr>
@@ -83,7 +83,7 @@
             <div class="col-sm-6 mb-3">
               <div class="card h-100">
                 <div class="card-body">
-                  <h6 class="d-flex align-items-center mb-3">Most Successful Products</h6>
+                  <h6 class="d-flex align-items-center mb-3">Most Successful Contracts</h6>
                   <small>Cat Litter</small>
                   <div class="progress mb-3" style="height: 5px">
                     <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -120,8 +120,7 @@
       </div>
     </div>
     <hr>
-    <p>testing</p>
-    </div>
+  </div>
 </template>
 
 <script>

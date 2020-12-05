@@ -15,8 +15,9 @@
                       <p class="text-secondary mb-1">Mittons for Kittons!</p>
                       <p class="text-muted font-size-sm">Bronx, NY</p>
                       <!-- TODO: Only show these if owner of profile -->
-                      <button><router-link to="/create">Create New Listing</router-link></button><br><br>
-                      <button action="TODO: Open edit page">Edit Profile</button>
+                      <button><router-link to="/create">Create New Listing</router-link></button>
+                      <br><br>
+                      <button><router-link to="/mylistings">My Listings</router-link></button>
                     </div>
                   </div>
                 </div>
@@ -95,44 +96,13 @@
                     </div>
                   </div>
                   <hr>
-                  <!-- <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Current Products</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      Our current product line focuses on people who need cats, without the
-                    </div>
-                  </div> -->
                 </div>
               </div>
               <div class="row gutters-sm">
-                <!-- <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">Open Contracts</h6>
-                      <small>Calico - 80 % Sold</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Tabby - 72 % Sold</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Egyptian - 89 % Sold</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Norse - 55 % Sold</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
                 <div class="col-md mb-4">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3">WeSeller Rating</h6>
+                      <h6 class="d-flex align-items-center mb-3">Ratings from WeSellers</h6>
                       <small>Overall</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>

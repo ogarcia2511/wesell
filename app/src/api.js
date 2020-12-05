@@ -245,10 +245,10 @@ export default {
       docRef.update({
         users: firebase.firestore.FieldValue.arrayUnion(uid),
         applications: firebase.firestore.FieldValue.arrayRemove(uid)
-      });
-
-      this.$router.go({
-        name: "Home"
+      }).then(() => {
+        this.$router.go({
+          name: "Listings"
+        });
       });
     };
 
@@ -258,10 +258,10 @@ export default {
 
       docRef.update({
         applications: firebase.firestore.FieldValue.arrayRemove(uid)
-      });
-
-      this.$router.go({
-        name: "Home"
+      }).then(() => {
+        this.$router.go({
+          name: "Listings"
+        });
       });
     };
 
@@ -269,18 +269,48 @@ export default {
     Vue.prototype.logSale = function (uid, listingId, n) {
       let docRef = db.doc(`listings/${listingId}`);
 
+      let k = `sales.${uid}`;
+
       docRef.update({
-        sales: { uid: firebase.firestore.FieldValue.increment(n) }
+        [k]: firebase.firestore.FieldValue.increment(n)
+      }).then(() => {
+        this.$router.go({
+          name: "Listings"
+        });
       });
     };
 
     Vue.prototype.removeListing = function (listingId) {
-      db.doc(`listings/${listingId}`).delete();
-
-      this.$router.go({
-        name: "Home"
+      db.doc(`listings/${listingId}`)
+      .delete().then(() => {
+        this.$router.go({
+          name: "Listings"
+        });
       });
-    }
+    };
+
+    Vue.prototype.getListingsByContractor = async function (uid) {
+      const snapshot = await db.collection('listings').get();
+      const data = snapshot.docs.map(doc => doc.data());
+
+      const listings = data.filter((l) => {
+        return l.users.includes(uid);
+      });
+
+      return listings;
+    };
+
+    Vue.prototype.exitContract = function (uid, listingId) {
+      let docRef = db.doc(`listings/${listingId}`);
+
+      docRef.update({
+        users: firebase.firestore.FieldValue.arrayRemove(uid),
+      }).then(() => {
+        this.$router.go({
+          name: "Listings"
+        });
+      });
+    };
   },
 }
 

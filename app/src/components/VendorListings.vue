@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="text-center">Active Sales Listings</h1>
-    <OwnListing v-for="listing in listings" :key="listing.id"
+    <OwnListing v-for="listing in notNullListings" :key="listing.id"
       :productName="listing.productName"
       :companyName="listing.companyName"
       :blurb="listing.blurb"
@@ -10,7 +10,8 @@
       :image="listing.image"
       :price="listing.price"
       :users="listing.users"
-      :idToNameMap="idToNameMap" />
+      :idToNameMap="idToNameMap"
+      :sales="listing.sales" />
   </div>
 </template>
 
@@ -30,6 +31,9 @@ export default {
     ...mapGetters({
       user: 'user',
     }),
+    notNullListings() {
+      return this.listings.filter((l) => l !== null);
+    },
   },
   async created() {
     const listingIds = await this.getListingsByOwner(this.user.auth.uid);

@@ -1,13 +1,10 @@
 <template>
   <div>
-    <b-button v-b-modal="modalId">Apply</b-button>
+    <b-button class="btn btn-info" v-b-modal="modalId">Apply</b-button>
     <b-modal :id="modalId" title="Apply for this Listing" @ok="handleOk">
       <b-form>
         <b-form-group>
 
-        </b-form-group>
-        <b-form-group>
-          <b-form-checkbox required name="accept terms">I accept the terms.</b-form-checkbox>
         </b-form-group>
         <b-form-group
           label="Upload a resume here."
@@ -31,10 +28,8 @@ export default {
     }),
   },
   methods: {
-    handleOk(bvModalEvt) {
-      bvModalEvt.preventDefault();
+    handleOk() {
       this.applyForListing(this.user.auth.uid, this.listingId);
-      console.log('applied');
     },
   },
 };

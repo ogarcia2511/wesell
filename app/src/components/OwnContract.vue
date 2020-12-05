@@ -22,9 +22,27 @@
             <b-card-img thumbnail fluid :src="image" />
           </b-col>
           <b-col cols="8">
-            <template v-if="user.isLoggedIn && user.data.type == 1">
-              <ListingApply :modalId="modalId" :listingId="id" />
-            </template>
+            <b-row>
+              <b-col cols="4">
+                <b-button class="btn btn-danger" @click="exitContract(user.auth.uid, id)">
+                  Exit Contract
+                </b-button>
+              </b-col>
+              <b-col cols="8">
+                <b-form class="flex-box">
+                    <b-form-input
+                      type="number"
+                      class="col-sm-8"
+                      v-model="sales" />
+                    <b-button
+                      class="btn btn-success"
+                      style="float: right;"
+                      @click="logSale(user.auth.uid, id, sales)">
+                        Log Sales
+                    </b-button>
+                </b-form>
+              </b-col>
+            </b-row>
             <hr>
             <b-card-text>{{ description }}</b-card-text>
           </b-col>
@@ -37,14 +55,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ListingApply from '@/components/ListingApply.vue';
 
 export default {
-  components: { ListingApply },
   props: ['id', 'productName', 'companyName', 'blurb', 'description', 'image', 'price'],
   data() {
     return {
       modalId: `m${this.id}`,
+      sales: 0,
     };
   },
   computed: {
@@ -69,5 +86,10 @@ b-card-img {
   color: green;
   padding: 2px;
   margin-right: 1em;
+}
+
+.flex-box {
+  display:flex;
+  justify-content:space-between;
 }
 </style>

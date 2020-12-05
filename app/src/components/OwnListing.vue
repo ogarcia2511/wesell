@@ -25,12 +25,15 @@
             <b-button class="btn btn-danger" @click="removeListing(id)">
                 Remove Listing
             </b-button>
+            <hr>
             <b-card-text>{{ description }}</b-card-text>
             <hr>
-            <h5>WeSellers</h5>
+            <h4>Current WeSellers</h4>
             <b-list-group v-if="users.length > 0">
                 <b-list-group-item v-for="user in users" :key="user">
-                    {{ idToNameMap[user] }}
+                    <b>{{ idToNameMap[user] }}</b>
+                    <p v-if="sales.hasOwnProperty(user)">{{ sales[user] }} sales</p>
+                    <p v-else>No sales yet recorded</p>
                 </b-list-group-item>
             </b-list-group>
             <p v-else>No WeSellers found for this listing.</p>
@@ -46,7 +49,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  props: ['id', 'productName', 'companyName', 'blurb', 'description', 'image', 'price', 'users', 'idToNameMap'],
+  props: ['id', 'productName', 'companyName', 'blurb', 'description', 'image', 'price', 'users', 'idToNameMap', 'sales'],
   data() {
     return {
       modalId: `m${this.id}`,

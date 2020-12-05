@@ -20,81 +20,40 @@
       </b-col>
     </b-row>
     <hr>
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-1" />
-
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-2" />
-
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-3" />
-    <br><br><br>
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-4" />
-
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-5" />
-
-    <Listing
-      productName="Product Name"
-      companyName="Test Co."
-      blurb="A short paragraph describing
-      the product itself. Maybe add a company
-      name here?"
-      :description="text"
-      id="accordion-6" />
+    <OwnContract v-for="listing in listings" :key="listing.id"
+      :productName="listing.productName"
+      :companyName="listing.companyName"
+      :blurb="listing.blurb"
+      :description="listing.description"
+      :id="listing.id"
+      :image="listing.image"
+      :price="listing.price"
+      :users="listing.users"
+      :idToNameMap="idToNameMap" />
   </div>
 </template>
 
 <script>
-import Listing from '@/components/Listing.vue';
+import { mapGetters } from 'vuex';
+import OwnContract from '@/components/OwnContract.vue';
 
 export default {
-  components: { Listing },
+  components: {
+    OwnContract,
+  },
   props: ['search'],
+  computed: {
+    ...mapGetters({
+      user: 'user',
+    }),
+  },
   data() {
     return {
-      text: `
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-          richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-          brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-          tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-          assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-          wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-          vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-          synth nesciunt you probably haven't heard of them accusamus labore VHS.
-        `,
+      listings: [],
     };
+  },
+  async created() {
+    this.listings = await this.getListingsByContractor(this.user.auth.uid);
   },
 };
 </script>
