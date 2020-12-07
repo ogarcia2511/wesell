@@ -1,5 +1,5 @@
 # wesell
 
-# omar smells like cheese sometimes but other times he smell s nice : )
+Github repository for COEN 174 project with Omar Garcia, James Grom, and Gregor Limstrom
 
-# have you seen his crunchy socks?
+To run, navigate to app and check out the readme there to see how to run the project!
